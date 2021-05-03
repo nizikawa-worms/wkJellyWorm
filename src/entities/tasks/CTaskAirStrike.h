@@ -2,7 +2,7 @@
 #define WKJELLYWORM_CTASKAIRSTRIKE_H
 
 
-#include <src/entities/CTask.h>
+#include "../CTask.h"
 
 class CTaskAirStrike : public CTask {
 public:

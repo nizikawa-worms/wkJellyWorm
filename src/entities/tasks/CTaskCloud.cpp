@@ -1,8 +1,8 @@
 #include "CTaskCloud.h"
-#include <src/Lua.h>
-#include <include/lua/lua.hpp>
-#include <include/sol.hpp>
-#include <src/Hooks.h>
+#include "../../Lua.h"
+
+#include <sol/sol.hpp>
+#include "../../Hooks.h"
 
 int CTaskCloud::install(SignatureScanner &signatureScanner, module mod) {
 	DWORD addrConstructCTaskCloud =  Hooks::scanPattern("ConstructCTaskCloud", "\x8B\x48\x2C\x53\x8B\x5C\x24\x10\x51\x50\x56\xE8\x00\x00\x00\x00\x8B\x44\x24\x0C\x8B\x54\x24\x14\x89\x5E\x40\x03\xDF\x81\xE3\x00\x00\x00\x00\x89\x46\x30", "??????xxxxxx????xxxxxxxxxxxxxxx????xxx", 0x5482E0);

@@ -1,7 +1,7 @@
 #include "Lobby.h"
 #include <MinHook.h>
 #include <json.hpp>
-#include <src/packages/PackageManager.h>
+#include "packages/PackageManager.h"
 
 #include "Config.h"
 #include "Hooks.h"
@@ -185,12 +185,12 @@ int Lobby::install(SignatureScanner & signatureScanner, module mod) {
 			Hooks::scanPattern("LobbySendGreentext", "\x6A\xFF\x68\x00\x00\x00\x00\x64\xA1\x00\x00\x00\x00\x50\x64\x89\x25\x00\x00\x00\x00\x51\x56\x57\x8B\xF1\x68\x00\x00\x00\x00\x8D\x4C\x24\x0C\xE8\x00\x00\x00\x00\x80\x7C\x24\x00\x00", "???????xx????xxxx????xxxxxx????xxxxx????xxx??", 0x4AA990);
 	addrMyNickname = *(DWORD*)((DWORD)addrLobbySendGreentext + 0x4D);
 
-	Hooks::minhook("LobbyHostCommands", addrLobbyHostCommands, (DWORD*)&hookLobbyHostCommands, (DWORD*)&origLobbyHostCommands);
-	Hooks::minhook("LobbyClientCommands", addrLobbyClientCommands, (DWORD*)&hookLobbyClientCommands, (DWORD*)&origLobbyClientCommands);
-	Hooks::minhook("LobbyDisplayMessage", addrLobbyDisplayMessage, (DWORD*)&hookLobbyDisplayMessage, (DWORD*)&origLobbyDisplayMessage);
-	Hooks::minhook("FrontendChangeScreen", addrFrontendChangeScreen, (DWORD*)&hookFrontendChangeScreen, (DWORD*)&origFrontendChangeScreen);
-	Hooks::minhook("LobbyPrintUsedVersion", addrLobbyPrintUsedVersion, (DWORD*)&hookLobbyPrintUsedVersion, (DWORD*)&origLobbyPrintUsedVersion);
-	Hooks::minhook("CwndEnableWindow", addrCwndEnableWindow, (DWORD*)&hookCwndEnableWindow, (DWORD*)&origCwndEnableWindow);
+	Hooks::polyhook("LobbyHostCommands", addrLobbyHostCommands, (DWORD *) &hookLobbyHostCommands, (DWORD *) &origLobbyHostCommands);
+	Hooks::polyhook("LobbyClientCommands", addrLobbyClientCommands, (DWORD *) &hookLobbyClientCommands, (DWORD *) &origLobbyClientCommands);
+	Hooks::polyhook("LobbyDisplayMessage", addrLobbyDisplayMessage, (DWORD *) &hookLobbyDisplayMessage, (DWORD *) &origLobbyDisplayMessage);
+	Hooks::polyhook("FrontendChangeScreen", addrFrontendChangeScreen, (DWORD *) &hookFrontendChangeScreen, (DWORD *) &origFrontendChangeScreen);
+	Hooks::polyhook("LobbyPrintUsedVersion", addrLobbyPrintUsedVersion, (DWORD *) &hookLobbyPrintUsedVersion, (DWORD *) &origLobbyPrintUsedVersion);
+	Hooks::polyhook("CwndEnableWindow", addrCwndEnableWindow, (DWORD *) &hookCwndEnableWindow, (DWORD *) &origCwndEnableWindow);
 
 	return 0;
 }

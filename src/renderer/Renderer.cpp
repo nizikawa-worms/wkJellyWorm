@@ -253,16 +253,16 @@ int Renderer::install(SignatureScanner &, module) {
 
 	DWORD addrRenderDrawingQueue = Hooks::scanPattern("RenderDrawingQueue", "\x83\xEC\x1C\x53\x55\x8B\x6C\x24\x28\x56\x57\x8B\xF0\x8B\x86\x00\x00\x00\x00\x68\x00\x00\x00\x00\x6A\x04\x50\x8D\x8E\x00\x00\x00\x00\x51\xE8\x00\x00\x00\x00", "??????xxxxxxxxx????x????xxxxx????xx????", 0x542350);
 
-	Hooks::minhook("BlitScreen", addrBlitScreen, (DWORD*) &hookBlitScreen, (DWORD*)&origBlitScreen);
-	Hooks::minhook("DrawBitmapOnBitmapAnyDepth", addrDrawBitmapOnBitmapAnyDepth, (DWORD*) &hookDrawBitmapOnBitmapAnyDepth, (DWORD*)&origDrawBitmapOnBitmapAnyDepth);
-	Hooks::minhook("OpenGLDraw", addrOpenGLDraw, (DWORD*) &hookOpenGLDraw, (DWORD*)&origOpenGLDraw);
-	Hooks::minhook("OpenGLInit", addrOpenGLInit, (DWORD*) &hookOpenGLInit, (DWORD*)&origOpenGLInit);
-	Hooks::minhook("OpenGLSwapBuffers", addrOpenGLSwapBuffers, (DWORD*) &hookOpenGLSwapBuffers, (DWORD*)&origOpenGLSwapBuffers);
+	Hooks::polyhook("BlitScreen", addrBlitScreen, (DWORD *) &hookBlitScreen, (DWORD *) &origBlitScreen);
+	Hooks::polyhook("DrawBitmapOnBitmapAnyDepth", addrDrawBitmapOnBitmapAnyDepth, (DWORD *) &hookDrawBitmapOnBitmapAnyDepth, (DWORD *) &origDrawBitmapOnBitmapAnyDepth);
+	Hooks::polyhook("OpenGLDraw", addrOpenGLDraw, (DWORD *) &hookOpenGLDraw, (DWORD *) &origOpenGLDraw);
+	Hooks::polyhook("OpenGLInit", addrOpenGLInit, (DWORD *) &hookOpenGLInit, (DWORD *) &origOpenGLInit);
+	Hooks::polyhook("OpenGLSwapBuffers", addrOpenGLSwapBuffers, (DWORD *) &hookOpenGLSwapBuffers, (DWORD *) &origOpenGLSwapBuffers);
 
-	Hooks::minhook("DestroyBitmapDescriptor", addrDestroyBitmapDescriptor, (DWORD*) &hookDestroyBitmapDescriptor, (DWORD*)&origDestroyBitmapDescriptor);
-	Hooks::minhook("ConstructBitmapDescriptor", addrConstructBitmapDescriptor, (DWORD*) &hookConstructBitmapDescriptor, (DWORD*)&origConstructBitmapDescriptor);
-	Hooks::minhook("RenderDrawingQueue", addrRenderDrawingQueue, (DWORD*) &hookRenderDrawingQueue, (DWORD*)&origRenderDrawingQueue);
-	Hooks::minhook("WriteScreenPalette", addrWriteScreenPalette, (DWORD*) &hookWriteScreenPalette, (DWORD*)&origWriteScreenPalette);
+	Hooks::polyhook("DestroyBitmapDescriptor", addrDestroyBitmapDescriptor, (DWORD *) &hookDestroyBitmapDescriptor, (DWORD *) &origDestroyBitmapDescriptor);
+	Hooks::polyhook("ConstructBitmapDescriptor", addrConstructBitmapDescriptor, (DWORD *) &hookConstructBitmapDescriptor, (DWORD *) &origConstructBitmapDescriptor);
+	Hooks::polyhook("RenderDrawingQueue", addrRenderDrawingQueue, (DWORD *) &hookRenderDrawingQueue, (DWORD *) &origRenderDrawingQueue);
+	Hooks::polyhook("WriteScreenPalette", addrWriteScreenPalette, (DWORD *) &hookWriteScreenPalette, (DWORD *) &origWriteScreenPalette);
 
 
 

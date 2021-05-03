@@ -1,8 +1,8 @@
 #include "Game.h"
 #include <MinHook.h>
-#include <src/packages/PackageManager.h>
+#include "packages/PackageManager.h"
 #include "Config.h"
-#include "src/entities/Entities.h"
+#include "entities/Entities.h"
 
 #include "Chat.h"
 #include "Landscape.h"
@@ -91,9 +91,9 @@ int Game::install(SignatureScanner & signatureScanner, module mod) {
 
 	addrGameinfoObject =  *(DWORD*)(addrReferencesGameinfo + 0x24);
 
-	Hooks::minhook("constructGlobalContext", addrConstructGlobalContext, (DWORD*)&hookConstructGlobalContext, (DWORD*)&origConstructGlobalContext);
-	Hooks::minhook("destroyGlobalContext", addrDestroyGlobalContext, (DWORD*)&hookDestroyGlobalContext, (DWORD*)&origDestroyGlobalContext);
-	Hooks::minhook("ConstructDDGameWrapper", addrConstructDDGameWrapper, (DWORD*) &hookConstructDDGameWrapper, (DWORD*)&origConstructDDGameWrapper);
+	Hooks::polyhook("constructGlobalContext", addrConstructGlobalContext, (DWORD *) &hookConstructGlobalContext, (DWORD *) &origConstructGlobalContext);
+	Hooks::polyhook("destroyGlobalContext", addrDestroyGlobalContext, (DWORD *) &hookDestroyGlobalContext, (DWORD *) &origDestroyGlobalContext);
+	Hooks::polyhook("ConstructDDGameWrapper", addrConstructDDGameWrapper, (DWORD *) &hookConstructDDGameWrapper, (DWORD *) &origConstructDDGameWrapper);
 	return 0;
 }
 

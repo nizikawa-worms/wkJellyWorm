@@ -4,7 +4,7 @@
 
 
 #include <sigscanner.h>
-#include <src/Constants.h>
+#include "../Constants.h"
 #include "Palette.h"
 #include "Bitmap.h"
 #include "BitmapExtension.h"
@@ -14,7 +14,7 @@
 //#include <GL/glu.h>
 #include <GL/glew.h>
 #include <map>
-#include <src/Sprites.h>
+#include "../Sprites.h"
 
 
 class CTaskTurnGame;

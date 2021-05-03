@@ -3,7 +3,7 @@
 #define WKJELLYWORM_CTASKSMOKE_H
 
 
-#include <src/entities/CTask.h>
+#include "../CTask.h"
 
 class CTaskSmoke : public CTask {
 public:

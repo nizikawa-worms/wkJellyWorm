@@ -27,6 +27,6 @@ int __stdcall hookSendGamePacketWrapped(Constants::TaskMessage a3, void *data) {
 
 int Packets::install(SignatureScanner & signatureScanner, module mod) {
 	DWORD addrSendGamePacketWrapped = Hooks::scanPattern("SendGamePacketWrapped", "\x56\x8B\xF1\x83\xC6\x03\x83\xE6\xFC\x8D\x4E\x04\xE8\x00\x00\x00\x00\x85\xC0\x75\x04","??????xxxxxxx????xxxx", 0x541130);
-	Hooks::minhook("SendGamePacketWrapped", addrSendGamePacketWrapped, (DWORD*)&hookSendGamePacketWrapped, (DWORD*)&origSendGamePacketWrapped);
+	Hooks::polyhook("SendGamePacketWrapped", addrSendGamePacketWrapped, (DWORD *) &hookSendGamePacketWrapped, (DWORD *) &origSendGamePacketWrapped);
 	return 0;
 }

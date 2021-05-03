@@ -3,7 +3,7 @@
 #define WKJELLYWORM_CTASKOLDWORM_H
 
 
-#include "src/entities/CGameTask.h"
+#include "../CGameTask.h"
 
 class CTaskOldWorm : public CGameTask {
 public:

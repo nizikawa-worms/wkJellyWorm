@@ -1,8 +1,8 @@
 #include "CTaskCanister.h"
-#include <src/Lua.h>
-#include <include/lua/lua.hpp>
-#include <include/sol.hpp>
-#include <src/Hooks.h>
+#include "../../Lua.h"
+
+#include <sol/sol.hpp>
+#include "../../Hooks.h"
 
 int CTaskCanister::install(SignatureScanner &signatureScanner, module mod) {
 	DWORD addrConstructCTaskCanister =   Hooks::scanPattern("ConstructCCanister", "\x6A\xFF\x64\xA1\x00\x00\x00\x00\x68\x00\x00\x00\x00\x50\x8B\x44\x24\x14\x64\x89\x25\x00\x00\x00\x00\x53\x8B\x5C\x24\x14\x55\x8B\x6C\x24\x24", "????????x????xxxxxxxx????xxxxxxxxxx", 0x501A80);

@@ -4,7 +4,7 @@
 #include <sigscanner.h>
 #include <vector>
 #include <string>
-#include <src/entities/CTask.h>
+#include "entities/CTask.h"
 
 class Sounds {
 private:

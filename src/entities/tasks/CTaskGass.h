@@ -2,7 +2,7 @@
 #define WKJELLYWORM_CTASKGASS_H
 
 
-#include <src/entities/CTask.h>
+#include "../CTask.h"
 
 class CTaskGass : public CTask {
 public:

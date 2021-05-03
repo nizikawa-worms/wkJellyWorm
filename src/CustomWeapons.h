@@ -5,9 +5,9 @@
 #include <array>
 #include <map>
 #include <vector>
-#include <src/entities/tasks/CTaskTeam.h>
+#include "entities/tasks/CTaskTeam.h"
 #include "Constants.h"
-#include "src/entities/Entities.h"
+#include "entities/Entities.h"
 
 class CustomWeapons {
 public:

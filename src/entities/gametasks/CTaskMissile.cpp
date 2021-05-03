@@ -1,8 +1,8 @@
 #include "CTaskMissile.h"
-#include <src/Lua.h>
-#include <include/lua/lua.hpp>
-#include <include/sol.hpp>
-#include <src/Hooks.h>
+#include "../../Lua.h"
+
+#include <sol/sol.hpp>
+#include "../../Hooks.h"
 
 
 int CTaskMissile::install(SignatureScanner &signatureScanner, module mod) {

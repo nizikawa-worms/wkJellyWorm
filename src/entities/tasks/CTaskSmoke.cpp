@@ -1,8 +1,7 @@
 #include "CTaskSmoke.h"
-#include <src/Lua.h>
-#include <include/lua/lua.hpp>
-#include <include/sol.hpp>
-#include <src/Hooks.h>
+#include "../../Lua.h"
+#include <sol/sol.hpp>
+#include "../../Hooks.h"
 
 int CTaskSmoke::install(SignatureScanner &signatureScanner, module mod) {
 	DWORD addrConstructCTaskSmoke =  Hooks::scanPattern("ConstructCTaskSmoke", "\x8B\x48\x2C\x51\x50\x56\xE8\x00\x00\x00\x00\x8B\x46\x2C\xC7\x06\x00\x00\x00\x00\xC7\x46\x00\x00\x00\x00\x00\x83\x80\x00\x00\x00\x00\x00\x8B\x57\x04", "??????x????xxxxx????xx?????xx?????xxx", 0x5551D0);

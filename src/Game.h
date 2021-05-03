@@ -2,9 +2,9 @@
 #define WKJELLYWORM_GAME_H
 
 #include <sigscanner.h>
-#include <src/entities/Entities.h>
-#include <src/entities/gametasks/CTaskWorm.h>
-#include <src/entities/tasks/CTaskTurnGame.h>
+#include "entities/Entities.h"
+#include "entities/gametasks/CTaskWorm.h"
+#include "entities/tasks/CTaskTurnGame.h"
 #include "Constants.h"
 
 class Game {

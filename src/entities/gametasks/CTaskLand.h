@@ -2,7 +2,7 @@
 #ifndef WKJELLYWORM_CTASKLAND_H
 #define WKJELLYWORM_CTASKLAND_H
 
-#include "src/entities/CGameTask.h"
+#include "../CGameTask.h"
 
 class CTaskLand : public CGameTask {
 public:

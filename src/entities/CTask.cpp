@@ -1,8 +1,7 @@
 
-#include <src/Lua.h>
-#include <include/lua/lua.hpp>
-#include <include/sol.hpp>
-#include <src/Hooks.h>
+#include "../Lua.h"
+#include <sol/sol.hpp>
+#include "../Hooks.h"
 #include "CTask.h"
 
 
@@ -46,7 +45,7 @@ int CTask::install(SignatureScanner &signatureScanner, module mod) {
 	CTaskAddVTHooks(CTask, addrCTaskVTable)
 	CTaskAddLuaVTHooks(CTask)
 
-	Hooks::minhook("constructCTask", addrConstructCTask, (DWORD*)&hookConstructCTask, (DWORD*)&origConstructCTask);
+	Hooks::polyhook("constructCTask", addrConstructCTask, (DWORD *) &hookConstructCTask, (DWORD *) &origConstructCTask);
 	lua->set_function("getHashStoreObject", &callGetHashStoreObject);
 	return 0;
 }

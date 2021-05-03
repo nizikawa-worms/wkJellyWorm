@@ -1,8 +1,8 @@
 #include "CTaskFire.h"
-#include <src/Lua.h>
-#include <include/lua/lua.hpp>
-#include <include/sol.hpp>
-#include <src/Hooks.h>
+#include "../../Lua.h"
+
+#include <sol/sol.hpp>
+#include "../../Hooks.h"
 
 int CTaskFire::install(SignatureScanner &signatureScanner, module mod) {
 	DWORD addrConstructCTaskFire =  Hooks::scanPattern("ConstructCTaskFire", "\x6A\xFF\x68\x00\x00\x00\x00\x64\xA1\x00\x00\x00\x00\x50\x8B\x44\x24\x14\x64\x89\x25\x00\x00\x00\x00\x8B\x48\x2C\x53\x8B\x5C\x24\x1C\x55\x8B\x6C\x24\x18\x56\x57\x51\x50\x55\xE8\x00\x00\x00\x00\x33\xC0", "???????xx????xxxxxxxx????xxxxxxxxxxxxxxxxxxx????xx", 0x54F4C0);

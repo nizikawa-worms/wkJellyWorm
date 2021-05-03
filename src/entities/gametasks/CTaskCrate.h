@@ -4,7 +4,7 @@
 #define WKJELLYWORM_CTASKCRATE_H
 
 
-#include "src/entities/CGameTask.h"
+#include "../CGameTask.h"
 
 class CTaskCrate : public CGameTask {
 public:

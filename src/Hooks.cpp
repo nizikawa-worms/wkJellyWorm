@@ -5,8 +5,36 @@
 #include "Config.h"
 #include <fstream>
 #include <json.hpp>
+#include <MinHook.h>
+#include <polyhook2/CapstoneDisassembler.hpp>
 
-MH_STATUS Hooks::minhook(std::string name, DWORD pTarget, DWORD *pDetour, DWORD *ppOriginal) {
+
+void Hooks::polyhook(std::string name, DWORD pTarget, DWORD *pDetour, DWORD *ppOriginal) {
+	static PLH::CapstoneDisassembler dis(PLH::Mode::x86);
+	if(!pTarget)
+		throw std::runtime_error("Hook adress is null: " + name);
+	if(hookNameToAddr.find(name) != hookNameToAddr.end())
+		throw std::runtime_error("Hook name reused: " + name);
+	if(hookAddrToName.find(pTarget) != hookAddrToName.end()) {
+		std::stringstream ss;
+		ss << "The specified address is already hooked: " << name << "(0x" << std::hex << pTarget << "), " << hookAddrToName[pTarget];
+		throw std::runtime_error(ss.str());
+	}
+
+	uint64_t trampoline = 0;
+	auto detour = std::make_unique<PLH::x86Detour>(pTarget, (const uint64_t)pDetour, &trampoline, dis);
+	if(!detour->hook()) {
+		throw std::runtime_error("Failed to create hook: " + name);
+	}
+	detours.push_back(std::move(detour));
+	*ppOriginal = (DWORD)trampoline;
+
+	hookAddrToName[pTarget] = name;
+	hookNameToAddr[name] = pTarget;
+	printf("polyhook: %s 0x%X -> 0x%X\n", name.c_str(), pTarget, pDetour);
+}
+
+void Hooks::minhook(std::string name, DWORD pTarget, DWORD *pDetour, DWORD *ppOriginal) {
 	if(!pTarget)
 		throw std::runtime_error("Hook adress is null: " + name);
 	if(hookNameToAddr.find(name) != hookNameToAddr.end())
@@ -25,16 +53,6 @@ MH_STATUS Hooks::minhook(std::string name, DWORD pTarget, DWORD *pDetour, DWORD 
 	hookAddrToName[pTarget] = name;
 	hookNameToAddr[name] = pTarget;
 	printf("minhook: %s 0x%X -> 0x%X\n", name.c_str(), pTarget, pDetour);
-	return MH_OK;
-}
-
-void Hooks::hookApi(std::string name, LPCWSTR pszModule, LPCSTR pszProcName, DWORD *pDetour, DWORD *ppOriginal) {
-	LPVOID hook;
-	if(MH_CreateHookApiEx(pszModule, pszProcName, (LPVOID)pDetour, (LPVOID*)ppOriginal, &hook) != MH_OK)
-		throw std::runtime_error("Failed to create API hook: " + name);
-	if(MH_EnableHook(hook) != MH_OK)
-		throw std::runtime_error("Failed to enable API hook: " + name);
-	printf("minhook API: %s -> 0x%X\n", name.c_str(), (DWORD)pDetour);
 }
 
 //Worms development tools by StepS

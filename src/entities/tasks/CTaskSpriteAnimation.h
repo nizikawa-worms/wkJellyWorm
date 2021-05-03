@@ -4,7 +4,7 @@
 #define WKJELLYWORM_CTASKSPRITEANIMATION_H
 
 
-#include <src/entities/CTask.h>
+#include "../CTask.h"
 
 class CTaskSpriteAnimation : public CTask {
 public:

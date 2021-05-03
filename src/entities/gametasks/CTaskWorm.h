@@ -2,7 +2,7 @@
 #define WKJELLYWORM_CTASKWORM_H
 
 
-#include "src/entities/CGameTask.h"
+#include "../CGameTask.h"
 #include "../../Constants.h"
 
 class CTaskWorm : public CGameTask {

@@ -3,10 +3,9 @@
 #include "Game.h"
 #include "CustomWeapons.h"
 #include "Hooks.h"
-#include <src/Lua.h>
-#include <include/lua/lua.hpp>
-#include <include/sol.hpp>
-#include <src/packages/PackageManager.h>
+#include "Lua.h"
+#include <sol/sol.hpp>
+#include "packages/PackageManager.h"
 #include "renderer/Renderer.h"
 
 void (__stdcall *addrShowChatMessage)(DWORD addrResourceObject, int color, char * msg, int unk);
@@ -90,7 +89,7 @@ int Chat::install(SignatureScanner & signatureScanner, module mod) {
 			Hooks::scanPattern("ShowChatMessage", "\x81\xEC\x00\x00\x00\x00\x53\x55\x8B\xAC\x24\x00\x00\x00\x00\x80\xBD\x00\x00\x00\x00\x00\x8B\x85\x00\x00\x00\x00\x8B\x48\x24\x56\x8B\xB1\x00\x00\x00\x00\x57", "??????xxxxx????xx?????xx????xxxxxx????x", 0x52ACB0);
 	DWORD addrOnChatInput = Hooks::scanPattern("OnChatInput", "\x81\xEC\x00\x00\x00\x00\x55\x56\x57\x8B\xF8\x8A\x07\x84\xC0\x8B\xF1\x0F\x84\x00\x00\x00\x00\x3C\x2F\x0F\x85\x00\x00\x00\x00\x8D\x44\x24\x40", "??????xxxxxxxxxxxxx????xxxx????xxxx", 0x52B730);
 
-	Hooks::minhook("onChatInput", addrOnChatInput, (DWORD*)&hookOnChatInput, (DWORD*)&origOnChatInput);
+	Hooks::polyhook("onChatInput", addrOnChatInput, (DWORD *) &hookOnChatInput, (DWORD *) &origOnChatInput);
 
 	auto * lua = Lua::getInstance().getState();
 	lua->set_function("showChatMessage", &callShowChatMessage);

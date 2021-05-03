@@ -1,7 +1,7 @@
 #include "Lua.h"
 #include "Config.h"
 #include <lua/lua.hpp>
-#include <sol.hpp>
+#include <sol/sol.hpp>
 #include <filesystem>
 #include <fstream>
 #include <sstream>

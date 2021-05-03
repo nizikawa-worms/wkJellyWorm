@@ -1,7 +1,7 @@
 #ifndef WKJELLYWORM_CTASKFIRE_H
 #define WKJELLYWORM_CTASKFIRE_H
 
-#include <src/entities/CTask.h>
+#include "../CTask.h"
 
 class CTaskFire : public CTask {
 public:

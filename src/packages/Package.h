@@ -6,7 +6,7 @@
 #include <vector>
 #include <json.hpp>
 #include <tuple>
-#include <src/Lua.h>
+#include "../Lua.h"
 #include <filesystem>
 
 class Package {

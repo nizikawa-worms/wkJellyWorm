@@ -8,9 +8,8 @@
 #include "renderer/BitmapExtension.h"
 #include "WaLibc.h"
 #include "Config.h"
-#include <src/Lua.h>
-#include <include/lua/lua.hpp>
-#include <include/sol.hpp>
+#include "Lua.h"
+#include <sol/sol.hpp>
 
 void Sprites::onConstructGlobalContext(int a1) {
 	if(!customSprites.empty()) {
@@ -140,10 +139,10 @@ int Sprites::install(SignatureScanner &, module) {
 	DWORD *addrSpriteVTable = *(DWORD**)(addrConstructSprite + 0x7);
 	DWORD addrDestroySprite = addrSpriteVTable[0];
 
-	Hooks::minhook("LoadSprite", addrLoadSprite, (DWORD*)&hookLoadSprite, (DWORD*)&origLoadSprite);
-	Hooks::minhook("ProcessSprite", addrProcessSprite, (DWORD*)&hookProcessSprite, (DWORD*)&origProcessSprite);
-	Hooks::minhook("DestroySprite", addrDestroySprite, (DWORD*)&hookDestroySprite, (DWORD*)&origDestroySprite);
-	Hooks::minhook("LoadSprite_OpenVfsReader", addrLoadSprite_OpenVfsReader, (DWORD*)&hookLoadSprite_OpenVfsReader, (DWORD*)&origLoadSprite_OpenVfsReader);
+	Hooks::polyhook("LoadSprite", addrLoadSprite, (DWORD *) &hookLoadSprite, (DWORD *) &origLoadSprite);
+	Hooks::polyhook("ProcessSprite", addrProcessSprite, (DWORD *) &hookProcessSprite, (DWORD *) &origProcessSprite);
+	Hooks::polyhook("DestroySprite", addrDestroySprite, (DWORD *) &hookDestroySprite, (DWORD *) &origDestroySprite);
+	Hooks::polyhook("LoadSprite_OpenVfsReader", addrLoadSprite_OpenVfsReader, (DWORD *) &hookLoadSprite_OpenVfsReader, (DWORD *) &origLoadSprite_OpenVfsReader);
 
 	auto * lua = Lua::getInstance().getState();
 	lua->set_function("registerCustomSprite", &registerCustomSprite);

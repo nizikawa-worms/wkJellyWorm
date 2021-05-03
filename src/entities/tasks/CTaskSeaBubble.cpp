@@ -1,8 +1,7 @@
 #include "CTaskSeaBubble.h"
-#include <src/Lua.h>
-#include <include/lua/lua.hpp>
-#include <include/sol.hpp>
-#include <src/Hooks.h>
+#include "../../Lua.h"
+#include <sol/sol.hpp>
+#include "../../Hooks.h"
 
 int CTaskSeaBubble::install(SignatureScanner &signatureScanner, module mod) {
 	DWORD addrConstructCTaskSeaBubble =  Hooks::scanPattern("ConstructCTaskSeaBubble", "\x57\x8B\xF9\x8B\x48\x2C\x51\x50\x56\xE8\x00\x00\x00\x00\x8B\x17\x8B\x46\x2C\x8B\x4F\x08\xC7\x06\x00\x00\x00\x00\xC7\x46\x00\x00\x00\x00\x00", "??????xxxx????xxxxxxxxxx????xx?????", 0x554FE0);

@@ -4,7 +4,7 @@
 
 #include <sigscanner.h>
 #include <GL/glew.h>
-#include <src/Sprites.h>
+#include "../Sprites.h"
 #include <map>
 #include <unordered_map>
 #include "Palette.h"

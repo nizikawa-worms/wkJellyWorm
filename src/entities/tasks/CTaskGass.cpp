@@ -1,8 +1,8 @@
 #include "CTaskGass.h"
-#include <src/Lua.h>
-#include <include/lua/lua.hpp>
-#include <include/sol.hpp>
-#include <src/Hooks.h>
+#include "../../Lua.h"
+
+#include <sol/sol.hpp>
+#include "../../Hooks.h"
 
 int CTaskGass::install(SignatureScanner &signatureScanner, module mod) {
 	DWORD addrConstructCTaskGass =  Hooks::scanPattern("ConstructCTaskGass","\x8B\x48\x2C\x51\x50\x56\xE8\x00\x00\x00\x00\x8B\x44\x24\x08\x8B\x4E\x2C\x8B\x54\x24\x04\x89\x46\x38\x33\xC0\x89\x46\x3C\x89\x46\x40\x89\x46\x44\x89\x56\x34", "??????x????xxxxxxxxxxxxxxxxxxxxxxxxxxxx", 0x554750);

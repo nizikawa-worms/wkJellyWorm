@@ -3,7 +3,7 @@
 #define WKJELLYWORM_CTASKARROW_H
 
 
-#include "src/entities/CGameTask.h"
+#include "../CGameTask.h"
 
 class CTaskArrow : public CGameTask {
 public:

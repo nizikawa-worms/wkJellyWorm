@@ -2,7 +2,7 @@
 #define WKJELLYWORM_CTASKFILTER_H
 
 
-#include <src/entities/CTask.h>
+#include "../CTask.h"
 
 class CTaskFilter : public CTask {
 public:

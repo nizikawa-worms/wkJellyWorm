@@ -2,7 +2,7 @@
 #define WKJELLYWORM_CTASKFLAME_H
 
 
-#include <src/entities/CTask.h>
+#include "../CTask.h"
 
 class CTaskFlame : public CTask {
 public:

@@ -1,11 +1,10 @@
 #include "Bitmap.h"
 #include "../Hooks.h"
 #include "../Game.h"
-#include <src/Lua.h>
-#include <include/lua/lua.hpp>
-#include <include/sol.hpp>
-#include <src/Config.h>
-#include <src/WaLibc.h>
+#include "../Lua.h"
+#include <sol/sol.hpp>
+#include "../Config.h"
+#include "../WaLibc.h"
 #include "Renderer.h"
 #include "Palette.h"
 
@@ -154,14 +153,14 @@ int Bitmap::install(SignatureScanner &, module) {
 	addrLoadImgFromFile = Hooks::scanPattern("LoadImgFromFile", "\x6A\xFF\x68\x00\x00\x00\x00\x64\xA1\x00\x00\x00\x00\x50\x64\x89\x25\x00\x00\x00\x00\x83\xEC\x0C\x8B\x44\x24\x20\x56\x68\x00\x00\x00\x00\x50\xC7\x44\x24\x00\x00\x00\x00\x00", "???????xx????xxxx????xxxxxxxxx????xxxx?????", 0x57A900);
 
 
-	Hooks::minhook("ConstructBitmapImage", addrConstructBitmapImage, (DWORD*) &hookConstructBitmapImage, (DWORD*)&origConstructBitmapImage);
-	Hooks::minhook("DestroyBitmapImage", addrDestroyBitmapImage, (DWORD*) &hookDestroyBitmapImage, (DWORD*)&origDestroyBitmapImage);
-	Hooks::minhook("ConstructTextbox", addrConstructTextbox, (DWORD*) &hookConstructTextbox, (DWORD*)&origConstructTextbox);
-	Hooks::minhook("SetTextboxText", addrSetTextboxText, (DWORD*) &hookSetTextboxText, (DWORD*)&origSetTextboxText);
-	Hooks::minhook("DrawBitmapGlobal", addrDrawBitmapGlobal, (DWORD*) &hookDrawBitmapGlobal, (DWORD*)&origDrawBitmapGlobal);
-	Hooks::minhook("DrawTextboxLocal", addrDrawTextboxLocal, (DWORD*) &hookDrawTextboxLocal, (DWORD*)&origDrawTextboxLocal);
-	Hooks::minhook("DrawTextOnBitmap", addrDrawTextOnBitmap, (DWORD*) &hookDrawTextOnBitmap, (DWORD*)&origDrawTextOnBitmap);
-	Hooks::minhook("PrepareImg", addrPrepareImg, (DWORD*) &hookPrepareImg, (DWORD*)&origPrepareImg);
+	Hooks::polyhook("ConstructBitmapImage", addrConstructBitmapImage, (DWORD *) &hookConstructBitmapImage, (DWORD *) &origConstructBitmapImage);
+	Hooks::polyhook("DestroyBitmapImage", addrDestroyBitmapImage, (DWORD *) &hookDestroyBitmapImage, (DWORD *) &origDestroyBitmapImage);
+	Hooks::polyhook("ConstructTextbox", addrConstructTextbox, (DWORD *) &hookConstructTextbox, (DWORD *) &origConstructTextbox);
+	Hooks::polyhook("SetTextboxText", addrSetTextboxText, (DWORD *) &hookSetTextboxText, (DWORD *) &origSetTextboxText);
+	Hooks::polyhook("DrawBitmapGlobal", addrDrawBitmapGlobal, (DWORD *) &hookDrawBitmapGlobal, (DWORD *) &origDrawBitmapGlobal);
+	Hooks::polyhook("DrawTextboxLocal", addrDrawTextboxLocal, (DWORD *) &hookDrawTextboxLocal, (DWORD *) &origDrawTextboxLocal);
+	Hooks::polyhook("DrawTextOnBitmap", addrDrawTextOnBitmap, (DWORD *) &hookDrawTextOnBitmap, (DWORD *) &origDrawTextOnBitmap);
+	Hooks::polyhook("PrepareImg", addrPrepareImg, (DWORD *) &hookPrepareImg, (DWORD *) &origPrepareImg);
 
 
 

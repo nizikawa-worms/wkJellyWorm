@@ -6,8 +6,7 @@
 #include "Lua.h"
 #include "renderer/Bitmap.h"
 #include <array>
-#include <include/lua/lua.hpp>
-#include <include/sol.hpp>
+#include "sol/sol.hpp"
 
 // offsets refer to WA v.3.8.0
 
@@ -751,15 +750,15 @@ int CustomWeapons::install(SignatureScanner & signatureScanner, module mod) {
 	DWORD addrReduceDelayOnTurnStart = Hooks::scanPattern("ReduceDelayOnTurnStart", "\x8B\x46\x2C\x8B\x48\x24\x81\xB9\x00\x00\x00\x00\x00\x00\x00\x00\x53\x55\x57\x7C\x19\x8B\x56\x38\x69\xD2\x00\x00\x00\x00\x8B\x8C\x02\x00\x00\x00\x00", "??????xx????????xxxxxxxxxx????xxx????", 0x556E90);
 	DWORD addrGetAmmoFkeys = Hooks::scanPattern("GetAmmoFkeys", "\x51\x8B\x44\x24\x10\xC7\x00\x00\x00\x00\x00\x8B\x41\x38\x69\xC0\x00\x00\x00\x00\x53\x55\x56\x8B\x71\x2C", "??????x????xxxxx????xxxxxx", 0x55AAC0);
 
-	Hooks::minhook("initializeWeaponTable", addrInitializeWeaponTable, (DWORD*)&hookInitializeWeaponTable, (DWORD*)&origInitializeWeaponTable);
-	Hooks::minhook("getAmmo", addrGetAmmo, (DWORD*)&hookGetAmmo, (DWORD*)&origGetAmmo);
-	Hooks::minhook("addAmmo", addrAddAmmo, (DWORD*)&hookAddAmmo, (DWORD*)&origAddAmmo);
-	Hooks::minhook("subtractAmmo_v1", addrSubtractAmmo, (DWORD*)&hookSubtractAmmo, (DWORD*)&origSubtractAmmo);
-	Hooks::minhook("subtractAmmo_v2", addrSubtractAmmo_v2, (DWORD*)&hookSubtractAmmo_v2, (DWORD*)&origSubtractAmmo_v2);
+	Hooks::polyhook("initializeWeaponTable", addrInitializeWeaponTable, (DWORD *) &hookInitializeWeaponTable, (DWORD *) &origInitializeWeaponTable);
+	Hooks::polyhook("getAmmo", addrGetAmmo, (DWORD *) &hookGetAmmo, (DWORD *) &origGetAmmo);
+	Hooks::polyhook("addAmmo", addrAddAmmo, (DWORD *) &hookAddAmmo, (DWORD *) &origAddAmmo);
+	Hooks::polyhook("subtractAmmo_v1", addrSubtractAmmo, (DWORD *) &hookSubtractAmmo, (DWORD *) &origSubtractAmmo);
+	Hooks::polyhook("subtractAmmo_v2", addrSubtractAmmo_v2, (DWORD *) &hookSubtractAmmo_v2, (DWORD *) &origSubtractAmmo_v2);
 //	Hooks::minhook("loadWeaponPanelImgs", addrLoadWeaponPanelImgs, (DWORD*)&hookLoadWeaponPanelImgs, (DWORD*)&origLoadWeaponPanelImgs);
 //	Hooks::minhook("vfsCreateGfxDirReader", addrVfsCreateGfxDirReader, (DWORD*)&hookVfsCreateGfxDirReader, (DWORD*)&origVfsCreateGfxDirReader);
 //	Hooks::minhook("loadImgFromVfs", addrLoadImgFromVfs, (DWORD*) &hookLoadImgFromVfs, (DWORD*)&origLoadImgFromVfs);
-	Hooks::minhook("reduceDelayOnTurnStart", addrReduceDelayOnTurnStart, (DWORD*)&hookReduceDelayOnTurnStart, (DWORD*)&origReduceDelayOnTurnStart);
+	Hooks::polyhook("reduceDelayOnTurnStart", addrReduceDelayOnTurnStart, (DWORD *) &hookReduceDelayOnTurnStart, (DWORD *) &origReduceDelayOnTurnStart);
 
 
 	auto * lua = Lua::getInstance().getState();

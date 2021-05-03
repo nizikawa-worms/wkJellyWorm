@@ -2,9 +2,9 @@
 #ifndef WKJELLYWORM_CTASKTURNGAME_H
 #define WKJELLYWORM_CTASKTURNGAME_H
 
-#include <src/Constants.h>
-#include "src/entities/CTask.h"
-#include "src/entities/Entities.h"
+#include "../../Constants.h"
+#include "../CTask.h"
+#include "../Entities.h"
 
 class CTaskTurnGame : public CTask {
 public:

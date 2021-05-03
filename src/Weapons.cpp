@@ -1,14 +1,13 @@
 #include "Weapons.h"
-#include "src/entities/Entities.h"
+#include "entities/Entities.h"
 #include "Game.h"
 #include "Hooks.h"
 #include "CustomWeapons.h"
 
-#include <src/Lua.h>
-#include <include/lua/lua.hpp>
-#include <include/sol.hpp>
-#include <src/packages/PackageManager.h>
-#include <src/entities/gametasks/CTaskMissile.h>
+#include "Lua.h"
+#include <sol/sol.hpp>
+#include "packages/PackageManager.h"
+#include "entities/gametasks/CTaskMissile.h"
 
 
 
@@ -90,10 +89,10 @@ int Weapons::install(SignatureScanner &, module) {
 	DWORD addrFireWeapon = Hooks::scanPattern("FireWeapon", "\x56\x8B\x74\x24\x08\xC7\x46\x00\x00\x00\x00\x00\x8B\x50\x30\x83\xC2\xFF\x83\xFA\x03\x57\x0F\x87\x00\x00\x00\x00\xFF\x24\x95\x00\x00\x00\x00\x8B\x50\x38\x83\xC2\xFF\x83\xFA\x03", "??????x?????xxxxxxxxxxxx????xxx????xxxxxxxxx", 0x51EE60);
 	DWORD addrCreateWeaponProjectile = Hooks::scanPattern("CreateWeaponProjectile", "\x6A\xFF\x68\x00\x00\x00\x00\x64\xA1\x00\x00\x00\x00\x50\x64\x89\x25\x00\x00\x00\x00\x51\x56\x8B\xF1\x8B\x46\x2C\x8B\x88\x00\x00\x00\x00\x83\xC1\x07\x81\xF9\x00\x00\x00\x00\x57\x7E\x3C", "???????xx????xxxx????xxxxxxxxx????xxxxx????xxx", 0x51E0F0);
 
-	Hooks::minhook("WeaponRelease", addrWeaponRelease, (DWORD*) &hookWeaponRelease, (DWORD*)&origWeaponRelease);
-	Hooks::minhook("WormStartFiring", addrWormStartFiringWeapon, (DWORD*) &hookWormStartFiringWeapon, (DWORD*)&origWormStartFiringWeapon);
-	Hooks::minhook("FireWeapon", addrFireWeapon, (DWORD*) &hookFireWeapon, (DWORD*)&origFireWeapon);
-	Hooks::minhook("CreateWeaponProjectile", addrCreateWeaponProjectile, (DWORD*) &hookCreateWeaponProjectile, (DWORD*)&origCreateWeaponProjectile);
+	Hooks::polyhook("WeaponRelease", addrWeaponRelease, (DWORD *) &hookWeaponRelease, (DWORD *) &origWeaponRelease);
+	Hooks::polyhook("WormStartFiring", addrWormStartFiringWeapon, (DWORD *) &hookWormStartFiringWeapon, (DWORD *) &origWormStartFiringWeapon);
+	Hooks::polyhook("FireWeapon", addrFireWeapon, (DWORD *) &hookFireWeapon, (DWORD *) &origFireWeapon);
+	Hooks::polyhook("CreateWeaponProjectile", addrCreateWeaponProjectile, (DWORD *) &hookCreateWeaponProjectile, (DWORD *) &origCreateWeaponProjectile);
 
 
 	auto * lua = Lua::getInstance().getState();

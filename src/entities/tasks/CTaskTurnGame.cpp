@@ -1,12 +1,11 @@
 
-#include <src/Config.h>
-#include <src/Game.h>
+#include "../../Config.h"
+#include "../../Game.h"
 #include "CTaskTurnGame.h"
 
-#include <src/Hooks.h>
-#include <src/Lua.h>
-#include <include/lua/lua.hpp>
-#include <include/sol.hpp>
+#include "../../Hooks.h"
+#include "../../Lua.h"
+#include <sol/sol.hpp>
 
 void CTaskTurnGame::triggerTaskMessage(Constants::TaskMessage type, size_t size, void * data) {
 	CTaskTurnGame * turngame = (CTaskTurnGame*)Game::getAddrTurnGameObject();

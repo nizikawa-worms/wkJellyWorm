@@ -1,8 +1,8 @@
 #include "CTaskOldWorm.h"
-#include <src/Lua.h>
-#include <include/lua/lua.hpp>
-#include <include/sol.hpp>
-#include <src/Hooks.h>
+#include "../../Lua.h"
+
+#include <sol/sol.hpp>
+#include "../../Hooks.h"
 
 int CTaskOldWorm::install(SignatureScanner &signatureScanner, module mod) {
 	DWORD addrConstructCTaskOldWorm =  Hooks::scanPattern("ConstructCTaskOldWorm", "\x6A\xFF\x64\xA1\x00\x00\x00\x00\x68\x00\x00\x00\x00\x50\x64\x89\x25\x00\x00\x00\x00\x8B\x44\x24\x14\x53\x55\x8B\x6C\x24\x28\x56\x8B\x74\x24\x1C\x57\x6A\x03\x6A\x03", "????????x????xxxx????xxxxxxxxxxxxxxxxxxxx", 0x51FEB0);

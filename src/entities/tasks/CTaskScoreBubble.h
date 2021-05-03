@@ -2,7 +2,7 @@
 #define WKJELLYWORM_CTASKSCOREBUBBLE_H
 
 
-#include <src/entities/CTask.h>
+#include "../CTask.h"
 
 class CTaskScoreBubble : public CTask {
 public:

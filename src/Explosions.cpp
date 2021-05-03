@@ -3,10 +3,9 @@
 #include "Game.h"
 #include "Utils.h"
 
-#include <src/Lua.h>
-#include <include/lua/lua.hpp>
-#include <include/sol.hpp>
-#include <src/packages/PackageManager.h>
+#include "Lua.h"
+#include <sol/sol.hpp>
+#include "packages/PackageManager.h"
 
 DWORD origCreateExplosion;
 int __stdcall Explosions::hookCreateExplosion(int pushForce, int power, int a6, int team) {
@@ -60,8 +59,8 @@ int __stdcall hookSpecialImpact(CGameTask *This, int posX, int posY, int radiusX
 int Explosions::install(SignatureScanner &, module) {
 	DWORD addrCreateExplosion = Hooks::scanPattern("CreateExplosion", "\x55\x8B\xEC\x83\xE4\xF8\x81\xEC\x00\x00\x00\x00\x8B\x55\x08\x89\x4C\x24\x08\x8B\x4D\x10\x89\x54\x24\x0C\x8B\x55\x14\x89\x4C\x24\x14\x89\x44\x24\x04\x8B\x45\x0C\x33\xC9\x89\x54\x24\x18\x56\x8D\x51\x14\xC7\x44\x24\x00\x00\x00\x00\x00\x89\x44\x24\x14\xE8\x00\x00\x00\x00\x85\xC0", "xxxxxxxx????xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx?????xxxxx????xx", 0x548080);
 	DWORD addrSpecialImpact = Hooks::scanPattern("SpecialImpact", "\x81\xEC\x00\x00\x00\x00\x53\x83\xA4\x24\x00\x00\x00\x00\x00\x55\x56\x8B\xB4\x24\x00\x00\x00\x00\x8B\x46\x2C\x8B\x48\x24\x81\xC1\x00\x00\x00\x00\x89\x4C\x24\x14", "??????xxxx?????xxxxx????xxxxxxxx????xxxx", 0x5193D0);
-	Hooks::minhook("CreateExplosion", addrCreateExplosion, (DWORD*)&hookCreateExplosion, (DWORD*)&origCreateExplosion);
-	Hooks::minhook("SpecialImpact", addrSpecialImpact, (DWORD*)&hookSpecialImpact, (DWORD*)&origSpecialImpact);
+	Hooks::polyhook("CreateExplosion", addrCreateExplosion, (DWORD *) &hookCreateExplosion, (DWORD *) &origCreateExplosion);
+	Hooks::polyhook("SpecialImpact", addrSpecialImpact, (DWORD *) &hookSpecialImpact, (DWORD *) &origSpecialImpact);
 
 	auto * lua = Lua::getInstance().getState();
 	lua->set_function("createExplosion", &callCreateExplosion);

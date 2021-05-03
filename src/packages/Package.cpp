@@ -3,9 +3,8 @@
 #include <fstream>
 #include <json.hpp>
 #include <filesystem>
-#include <lua/lua.hpp>
-#include <sol.hpp>
-#include <src/Lua.h>
+#include "../Lua.h"
+#include <sol/sol.hpp>
 
 namespace fs = std::filesystem;
 

@@ -3,7 +3,7 @@
 #define WKJELLYWORM_CTASKTEAM_H
 
 
-#include "src/entities/CTask.h"
+#include "../CTask.h"
 
 class CTaskTeam : public CTask {
 public:

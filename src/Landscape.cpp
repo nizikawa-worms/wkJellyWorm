@@ -1,13 +1,12 @@
 #include <MinHook.h>
 #include "Landscape.h"
-#include "src/entities/Entities.h"
+#include "entities/Entities.h"
 #include "Game.h"
 #include "Hooks.h"
 
-#include <src/Lua.h>
-#include <include/lua/lua.hpp>
-#include <include/sol.hpp>
-#include <src/packages/PackageManager.h>
+#include "Lua.h"
+#include <sol/sol.hpp>
+#include "packages/PackageManager.h"
 
 int Landscape::onConstructGlobalContext(int a1) {
 //	CTask * turngame = (CTask*)Game::getAddrTurnGameObject();
@@ -110,10 +109,10 @@ int Landscape::install(SignatureScanner & signatureScanner, module mod) {
 	DWORD addrRedrawLandRegion = Hooks::scanPattern("RedrawLandRegion", "\x57\x8B\xF8\x81\xBF\x00\x00\x00\x00\x00\x00\x00\x00\x7C\x05\xE8\x00\x00\x00\x00\x8B\x87\x00\x00\x00\x00\x66\x8B\x4C\x24\x00\x66\x89\x8C\xC7\x00\x00\x00\x00\x8B\x97\x00\x00\x00\x00\x66\x8B\x44\x24\x00\x66\x89\x84\xD7\x00\x00\x00\x00\x8B\x8F\x00\x00\x00\x00\x66\x8B\x54\x24\x00", "?????????????xxx????xx????xxxx?xxxx????xx????xxxx?xxxx????xx????xxxx?", 0x57CC10);
 	DWORD addrWriteLandRaw = Hooks::scanPattern("WriteLandRaw", "\x83\xEC\x68\x8B\x87\x00\x00\x00\x00\x8B\x50\x08\x8B\x40\x10\x53\x55\x8B\x6C\x24\x74\x89\x44\x24\x74\x8B\x41\x14\x56\x8B\x71\x18\x89\x44\x24\x48\x83\xC0\x07\xC1\xF8\x03\x8B\xDD\x83\xC0\x03\x83\xE0\xFC\x83\xE3\x1F", "?????????xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", 0x57C300);
 
-	Hooks::minhook("RedrawLandRegion", addrRedrawLandRegion, (DWORD*)&hookRedrawLandRegion, (DWORD*)&origRedrawLandRegion);
-	Hooks::minhook("WriteLandRadius", addrWriteLandRadius, (DWORD*) &hookWriteLandRadius, (DWORD*)&origWriteLandRadius);
-	Hooks::minhook("WriteLandMaskID", addrWriteLandMaskID, (DWORD*) &hookWriteLandMaskID, (DWORD*)&origWriteLandMaskID);
-	Hooks::minhook("WriteLandRaw", addrWriteLandRaw, (DWORD*) &hookWriteLandRaw, (DWORD*)&origWriteLandRaw);
+	Hooks::polyhook("RedrawLandRegion", addrRedrawLandRegion, (DWORD *) &hookRedrawLandRegion, (DWORD *) &origRedrawLandRegion);
+	Hooks::polyhook("WriteLandRadius", addrWriteLandRadius, (DWORD *) &hookWriteLandRadius, (DWORD *) &origWriteLandRadius);
+	Hooks::polyhook("WriteLandMaskID", addrWriteLandMaskID, (DWORD *) &hookWriteLandMaskID, (DWORD *) &origWriteLandMaskID);
+	Hooks::polyhook("WriteLandRaw", addrWriteLandRaw, (DWORD *) &hookWriteLandRaw, (DWORD *) &origWriteLandRaw);
 
 	auto * lua = Lua::getInstance().getState();
 	lua->set_function("writeLandRadius", &callWriteLandRadius);

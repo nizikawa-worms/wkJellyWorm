@@ -1,5 +1,5 @@
 
-#include <src/WaLibc.h>
+#include "../WaLibc.h"
 #include "Palette.h"
 #include "Bitmap.h"
 

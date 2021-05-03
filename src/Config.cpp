@@ -4,7 +4,7 @@
 #include <filesystem>
 #include <sstream>
 #include <git.h>
-#include <src/packages/PackageManager.h>
+#include "packages/PackageManager.h"
 
 #include "Game.h"
 #include "CustomWeapons.h"

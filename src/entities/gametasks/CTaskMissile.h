@@ -3,7 +3,7 @@
 #define WKJELLYWORM_CTASKMISSILE_H
 
 
-#include "src/entities/CGameTask.h"
+#include "../CGameTask.h"
 
 class CTaskMissile : public CGameTask {
 public:

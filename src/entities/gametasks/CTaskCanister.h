@@ -3,7 +3,7 @@
 #define WKJELLYWORM_CTASKCANISTER_H
 
 
-#include "src/entities/CGameTask.h"
+#include "../CGameTask.h"
 
 class CTaskCanister : public CGameTask {
 public:

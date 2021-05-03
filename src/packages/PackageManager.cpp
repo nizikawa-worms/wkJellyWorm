@@ -3,14 +3,12 @@
 #include <Windows.h>
 #include <set>
 #include <sstream>
-#include <src/Lobby.h>
-#include <src/Utils.h>
+#include "../Lobby.h"
+#include "../Utils.h"
 #include <args.hxx>
-#include <src/Config.h>
-#include <lua/lua.hpp>
-#include <sol.hpp>
-#include <src/Lua.h>
-
+#include "../Config.h"
+#include "../Lua.h"
+#include <sol/sol.hpp>
 
 namespace fs = std::filesystem;
 

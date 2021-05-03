@@ -3,7 +3,7 @@
 #define WKJELLYWORM_CTASKCROSS_H
 
 
-#include "src/entities/CGameTask.h"
+#include "../CGameTask.h"
 
 class CTaskCross : public CGameTask {
 public:

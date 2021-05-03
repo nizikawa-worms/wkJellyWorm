@@ -2,7 +2,7 @@
 #define WKJELLYWORM_CTASKMINE_H
 
 
-#include "src/entities/CGameTask.h"
+#include "../CGameTask.h"
 
 class CTaskMine : public CGameTask {
 public:

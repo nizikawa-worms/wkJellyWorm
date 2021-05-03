@@ -1,8 +1,8 @@
 
-#include <src/Hooks.h>
-#include <src/Config.h>
-#include <src/Game.h>
-#include <src/WaLibc.h>
+#include "../Hooks.h"
+#include "../Config.h"
+#include "../Game.h"
+#include "../WaLibc.h"
 #include "Drawing.h"
 #include "Bitmap.h"
 #include "Renderer.h"
@@ -386,10 +386,10 @@ int Drawing::install(SignatureScanner &, module) {
 
 	DWORD addrSwitchScreenPalette = Hooks::scanPattern("SwitchScreenPalette", "\x51\x8B\x44\x24\x08\x66\x83\xB8\x00\x00\x00\x00\x00\x56\x8B\xF1\x66\xC7\x80\x00\x00\x00\x00\x00\x00\x0F\x8E\x00\x00\x00\x00\x53\x0F\xBF\x58\x02\x55\x0F\xBF\x28\x57\x0F\xB6\xB8\x00\x00\x00\x00\x89\x5C\x24\x10", "??????xx?????xxxxxx??????xx????xxxxxxxxxxxxx????xxxx", 0x56A610);
 
-	Hooks::minhook("DrawBitmapOnBitmap", addrDrawBitmapOnBitmap, (DWORD*) &hookDrawBitmapOnBitmap, (DWORD*)&origDrawBitmapOnBitmap);
-	Hooks::minhook("DrawLandscape", addrDrawLandscape, (DWORD*) &hookDrawLandscape, (DWORD*)&origDrawLandscape);
-	Hooks::minhook("RedrawFrontendBitmap", addrRedrawFrontendBitmap, (DWORD*) &hookRedrawFrontendBitmap, (DWORD*)&origRedrawFrontendBitmap);
-	Hooks::minhook("SwitchScreenPalette", addrSwitchScreenPalette, (DWORD*) &hookSwitchScreenPalette, (DWORD*)&origSwitchScreenPalette);
+	Hooks::polyhook("DrawBitmapOnBitmap", addrDrawBitmapOnBitmap, (DWORD *) &hookDrawBitmapOnBitmap, (DWORD *) &origDrawBitmapOnBitmap);
+	Hooks::polyhook("DrawLandscape", addrDrawLandscape, (DWORD *) &hookDrawLandscape, (DWORD *) &origDrawLandscape);
+	Hooks::polyhook("RedrawFrontendBitmap", addrRedrawFrontendBitmap, (DWORD *) &hookRedrawFrontendBitmap, (DWORD *) &origRedrawFrontendBitmap);
+	Hooks::polyhook("SwitchScreenPalette", addrSwitchScreenPalette, (DWORD *) &hookSwitchScreenPalette, (DWORD *) &origSwitchScreenPalette);
 
 	return 0;
 }

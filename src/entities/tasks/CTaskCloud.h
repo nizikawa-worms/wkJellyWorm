@@ -3,7 +3,7 @@
 #define WKJELLYWORM_CTASKCLOUD_H
 
 
-#include <src/entities/CTask.h>
+#include "../CTask.h"
 
 class CTaskCloud : public CTask {
 public:

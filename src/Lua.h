@@ -1,7 +1,7 @@
 #ifndef WKJELLYWORM_LUA_H
 #define WKJELLYWORM_LUA_H
 
-#include <forward.hpp>
+#include <sol/forward.hpp>
 #include <memory>
 #include <map>
 

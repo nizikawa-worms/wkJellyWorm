@@ -82,4 +82,4 @@ add_library(wkJellyWorm SHARED
         src/renderer/Palette.cpp src/renderer/Palette.h src/renderer/BitmapExtension.cpp src/renderer/BitmapExtension.h src/renderer/Drawing.cpp src/renderer/Drawing.h)
 
 set_property(TARGET wkJellyWorm git hacklib PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
-target_link_libraries(wkJellyWorm hacklib libMinHook-x86-v141-mt git lua53 glew32s glu32 opengl32)
+target_link_libraries(wkJellyWorm hacklib libMinHook-x86-v141-mt git lua53 glew32s glu32 opengl32 capstone Polyhook_2)

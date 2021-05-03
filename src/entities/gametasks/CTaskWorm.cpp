@@ -1,10 +1,9 @@
-#include <src/Hooks.h>
-#include <src/Constants.h>
-#include <src/Config.h>
+#include "../../Hooks.h"
+#include "../../Constants.h"
 #include "CTaskWorm.h"
-#include <src/Lua.h>
-#include <include/lua/lua.hpp>
-#include <include/sol.hpp>
+#include "../../Lua.h"
+
+#include <sol/sol.hpp>
 
 
 //int (__fastcall *origCTaskWormHandleMessage)(CTaskWorm *This, DWORD EDX, int x, Constants::TaskMessage y, int a4, int a5);

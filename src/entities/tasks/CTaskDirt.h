@@ -2,7 +2,7 @@
 #define WKJELLYWORM_CTASKDIRT_H
 
 
-#include <src/entities/CTask.h>
+#include "../CTask.h"
 
 class CTaskDirt : public CTask {
 public:

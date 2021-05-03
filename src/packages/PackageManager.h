@@ -5,10 +5,10 @@
 #include <string>
 #include <map>
 #include <set>
-#include <src/entities/CGameTask.h>
-#include <src/entities/gametasks/CTaskWorm.h>
-#include <src/CustomWeapons.h>
-#include <src/Weapons.h>
+#include "../entities/CGameTask.h"
+#include "../entities/gametasks/CTaskWorm.h"
+#include "../CustomWeapons.h"
+#include "../Weapons.h"
 #include "Package.h"
 
 

@@ -2,7 +2,7 @@
 #define WKJELLYWORM_CTASKOILDRUM_H
 
 
-#include "src/entities/CGameTask.h"
+#include "../CGameTask.h"
 
 class CTaskOildrum : public CGameTask {
 public:

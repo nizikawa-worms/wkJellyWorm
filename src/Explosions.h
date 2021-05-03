@@ -3,7 +3,7 @@
 
 
 #include <sigscanner.h>
-#include <src/entities/CGameTask.h>
+#include "entities/CGameTask.h"
 
 class Explosions {
 private:

@@ -2,7 +2,7 @@
 #ifndef WKJELLYWORM_CTASKFIREBALL_H
 #define WKJELLYWORM_CTASKFIREBALL_H
 
-#include <src/entities/CTask.h>
+#include "../CTask.h"
 
 class CTaskFireBall : public CTask {
 public:

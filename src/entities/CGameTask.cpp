@@ -1,10 +1,9 @@
 
-#include <src/Lua.h>
-#include <include/lua/lua.hpp>
-#include <include/sol.hpp>
-#include <src/Config.h>
-#include <src/Hooks.h>
-#include <src/packages/PackageManager.h>
+#include "../Lua.h"
+#include <sol/sol.hpp>
+#include "../Config.h"
+#include "../Hooks.h"
+#include "../packages/PackageManager.h"
 #include "CGameTask.h"
 
 
@@ -18,14 +17,16 @@ int __stdcall CGameTask::hookCGameTaskPhysics(int a1, CGameTask *object, int a3)
 
 
 int CGameTask::install(SignatureScanner &signatureScanner, module mod) {
-	DWORD addrConstructCGameTask =   Hooks::scanPattern("ConstructCGameTask","\x64\xA1\x00\x00\x00\x00\x6A\xFF\x68\x00\x00\x00\x00\x50\x8B\x44\x24\x14\x64\x89\x25\x00\x00\x00\x00\x8B\x48\x2C\x53\x56\x57\x8B\x7C\x24\x1C\x51\x50\x57\xE8\x00\x00\x00\x00\x33\xC0", "??????xxx????xxxxxxxx????xxxxxxxxxxxxxx????x", 0x4FED50);
+	DWORD addrConstructCGameTask =  Hooks::scanPattern("ConstructCGameTask","\x64\xA1\x00\x00\x00\x00\x6A\xFF\x68\x00\x00\x00\x00\x50\x8B\x44\x24\x14\x64\x89\x25\x00\x00\x00\x00\x8B\x48\x2C\x53\x56\x57\x8B\x7C\x24\x1C\x51\x50\x57\xE8\x00\x00\x00\x00\x33\xC0", "??????xxx????xxxxxxxx????xxxxxxxxxxxxxx????x", 0x4FED50);
 	DWORD* addrCGameTaskVTable = *(DWORD**)(addrConstructCGameTask + 0x36);
-	DWORD addrCGameTaskPhysics =   Hooks::scanPattern("CGameTaskPhysics", "\x83\xEC\x08\x53\x8B\x5C\x24\x14\x83\x7B\x3C\x00\x55\x56\x57\x0F\x84\x00\x00\x00\x00\x83\x7B\x48\x00\x0F\x85\x00\x00\x00\x00\x83\xBB\x00\x00\x00\x00\x00\x8B\x6C\x24\x1C\x7E\x4F", "??????xxxxxxxxxxx????xxxxxx????xx?????xxxxxx", 0x4FCDF0);
+	DWORD addrCGameTaskPhysics =  Hooks::scanPattern("CGameTaskPhysics", "\x83\xEC\x08\x53\x8B\x5C\x24\x14\x83\x7B\x3C\x00\x55\x56\x57\x0F\x84\x00\x00\x00\x00\x83\x7B\x48\x00\x0F\x85\x00\x00\x00\x00\x83\xBB\x00\x00\x00\x00\x00\x8B\x6C\x24\x1C\x7E\x4F", "??????xxxxxxxxxxx????xxxxxx????xx?????xxxxxx", 0x4FCDF0);
 
 	CTaskAddVTHooks(CGameTask, addrCGameTaskVTable)
 	CGameTaskAddVTHooks(CGameTask, addrCGameTaskVTable)
 
-	Hooks::minhook("CGameTaskPhysics", addrCGameTaskPhysics, (DWORD*)&hookCGameTaskPhysics, (DWORD*)&origCGameTaskPhysics);
+//	Hooks::polyhook("CGameTaskPhysics", addrCGameTaskPhysics, (DWORD *) &hookCGameTaskPhysics, (DWORD *) &origCGameTaskPhysics);
+	Hooks::minhook("CGameTaskPhysics", addrCGameTaskPhysics, (DWORD *) &hookCGameTaskPhysics, (DWORD *) &origCGameTaskPhysics);
+	// for some reason polyhook does it wrong
 
 	auto * lua = Lua::getInstance().getState();
 	sol::usertype <CGameTask> ut = lua->new_usertype <CGameTask> ("CGameTask", sol::base_classes, sol::bases<CTask>());

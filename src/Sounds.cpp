@@ -1,9 +1,8 @@
 #include "Sounds.h"
 #include "Hooks.h"
 #include "Game.h"
-#include <src/Lua.h>
-#include <include/lua/lua.hpp>
-#include <include/sol.hpp>
+#include "Lua.h"
+#include <sol/sol.hpp>
 
 
 DWORD (__fastcall *origLoadGameSoundFromFile)(DWORD This, int ECX, int index, const char * filename);
@@ -55,7 +54,7 @@ int Sounds::install(SignatureScanner &, module) {
 	DWORD addrPlaySoundGlobal = Hooks::scanPattern("addrPlaySoundGlobal", "\x8B\x51\x2C\x8B\x82\x00\x00\x00\x00\x83\xF8\x10\x7C\x05\x33\xC0\xC2\x10\x00\x83\x7A\x08\x00\x74\xF5\x8D\x04\xC0\x56\x8B\x74\x24\x08\x03\xC0\x03\xC0\x89\xB4\x10\x00\x00\x00\x00", "?????????xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx????", 0x546E20);
 	DWORD addrDSSound_vtable = *(DWORD*)(addrConstructDSSound + 0xB);
 	DWORD addrLoadGameSoundFromFile = *(DWORD*)(addrDSSound_vtable + 0x30);
-	Hooks::minhook("LoadGameSoundFromFile", addrLoadGameSoundFromFile, (DWORD*)&hookLoadGameSoundFromFile, (DWORD*)&origLoadGameSoundFromFile);
+	Hooks::polyhook("LoadGameSoundFromFile", addrLoadGameSoundFromFile, (DWORD *) &hookLoadGameSoundFromFile, (DWORD *) &origLoadGameSoundFromFile);
 
 	auto * lua = Lua::getInstance().getState();
 	lua->set_function("registerCustomSound", &registerCustomSound);

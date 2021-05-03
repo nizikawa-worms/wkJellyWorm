@@ -1,8 +1,8 @@
 #include "CTaskFireBall.h"
-#include <src/Lua.h>
-#include <include/lua/lua.hpp>
-#include <include/sol.hpp>
-#include <src/Hooks.h>
+#include "../../Lua.h"
+
+#include <sol/sol.hpp>
+#include "../../Hooks.h"
 
 int CTaskFireBall::install(SignatureScanner &signatureScanner, module mod) {
 	DWORD addrConstructCTaskFireBall =  Hooks::scanPattern("ConstructCTaskFireBall","\x8B\x48\x2C\x53\x8B\x5C\x24\x08\x55\x8B\x6C\x24\x2C\x56\x57\x51\x50\x53\xE8\x00\x00\x00\x00\x8B\x45\x0C\x8B\x55\x08\x8D\x7B\x3C\xB9\x00\x00\x00\x00", "??????xxxxxxxxxxxxx????xxxxxxxxxx????", 0x550890);

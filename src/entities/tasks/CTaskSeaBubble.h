@@ -2,7 +2,7 @@
 #define WKJELLYWORM_CTASKSEABUBBLE_H
 
 
-#include <src/entities/CTask.h>
+#include "../CTask.h"
 
 class CTaskSeaBubble : public CTask {
 public:
