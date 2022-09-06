@@ -1,5 +1,5 @@
 # wkJellyWorm
-_A work in progress ProjectX clone for Worms Armageddon 3.8.1_
+_A dead ProjectX clone for Worms Armageddon 3.8.1_
 
 This module hooks into most gameplay classes and exposes their functionality and internal structure to LUA scripts. It enables player to alter gameplay physics, object behaviour and add custom weapons.
 
